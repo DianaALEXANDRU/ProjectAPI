@@ -24,6 +24,7 @@ namespace Project.Settings
            
             services.AddScoped<AuthorizationService>();
             services.AddScoped<UserService>();
+            services.AddScoped<ProductService>();
         }
 
         private static void AddRepositories(IServiceCollection services)
@@ -31,6 +32,7 @@ namespace Project.Settings
           
             services.AddScoped<RoleRepository>();
             services.AddScoped<UserRepository>();
+            services.AddScoped<ProductRepository>();
 
             services.AddScoped<UnitOfWork>();
         }

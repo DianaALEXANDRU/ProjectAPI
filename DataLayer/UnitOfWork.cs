@@ -10,6 +10,8 @@ namespace DataLayer
 
         public RoleRepository Roles { get; }
 
+        public ProductRepository Products { get; }
+
         private readonly AppDbContext _dbContext;
 
         public UnitOfWork
@@ -17,13 +19,15 @@ namespace DataLayer
             AppDbContext dbContext,
          
             UserRepository users,
-            RoleRepository roles
+            RoleRepository roles,
+            ProductRepository products
         )
         {
             _dbContext = dbContext;
            
             Users = users;
             Roles = roles;
+            Products = products;
         }
 
         public void SaveChanges()
