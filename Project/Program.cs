@@ -35,12 +35,16 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-
-if (app.Environment.IsDevelopment())
+app.UseSwagger(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.RouteTemplate = "api/swagger/{documentName}/swagger.json";
+});
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/api/swagger/v1/swagger.json", "Project");
+    c.RoutePrefix = "api/swagger";
+});
+
 
 app.UseRouting();
 app.UseAuthentication();
