@@ -24,28 +24,36 @@ namespace Core.Services
         //generare token
         public string GenerateToken(User user, string role)
         {
-            var jwtTokenHandler = new JwtSecurityTokenHandler();
+            
+            
+                var jwtTokenHandler = new JwtSecurityTokenHandler();
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_securityKey));
-            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                /* Generate keys online
+                 * 128-bit  
+                 * https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx
+                */
 
-            var roleClaim = new Claim("role", role);
-            var idClaim = new Claim("userId", user.Id.ToString());
-            var infoClaim = new Claim("username", user.Username);
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_securityKey));
+                var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var tokenDescriptior = new SecurityTokenDescriptor
-            {
-                Issuer = "Backend",
-                Audience = "Frontend",
-                Subject = new ClaimsIdentity(new[] { roleClaim, idClaim, infoClaim }),
-                Expires = DateTime.Now.AddMinutes(50),
-                SigningCredentials = credentials
-            };
+                var roleClaim = new Claim("role", role);
+                var idClaim = new Claim("userId", user.Id.ToString());
+                var infoClaim = new Claim("username", user.Username);
 
-            var token = jwtTokenHandler.CreateToken(tokenDescriptior);
-            var tokenString = jwtTokenHandler.WriteToken(token);
+                var tokenDescriptior = new SecurityTokenDescriptor
+                {
+                    Issuer = "Backend",
+                    Audience = "Frontend",
+                    Subject = new ClaimsIdentity(new[] { roleClaim, idClaim, infoClaim }),
+                    Expires = DateTime.Now.AddMinutes(5),
+                    SigningCredentials = credentials
+                };
 
-            return tokenString;
+                var token = jwtTokenHandler.CreateToken(tokenDescriptior);
+                var tokenString = jwtTokenHandler.WriteToken(token);
+
+                return tokenString;
+            
         }
 
 
@@ -53,6 +61,7 @@ namespace Core.Services
 
         public bool ValidateToken(string tokenString)
         {
+           
             var jwtTokenHandler = new JwtSecurityTokenHandler();
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_securityKey));
 
