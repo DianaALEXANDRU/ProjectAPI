@@ -26,6 +26,19 @@ namespace Project.Controllers
             return Ok(result);
         }
 
+        [HttpGet("/getStock/{stockId}")]
+        public ActionResult<Product> GetById(int stockId)
+        {
+            var result = stockService.GetById(stockId);
+            
+            if (result == null)
+            {
+                return BadRequest("Stock not found!");
+            }
+
+            return Ok(result);
+        }
+
         [HttpPost("/addStock")]
         [Authorize(Roles = "Administrator")]
         public IActionResult Add([FromBody] StockAddDto payload)
@@ -53,6 +66,20 @@ namespace Project.Controllers
             }
 
             return Ok(result);
+        }
+
+        [HttpPatch("/editStock")]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult<bool> Update([FromBody] UpdateStockDto stock)
+        {
+            var result = stockService.UpdateStock(stock);
+
+            if (!result)
+            {
+                return BadRequest("Product could not be updated.");
+            }
+
+            return result;
         }
 
     }

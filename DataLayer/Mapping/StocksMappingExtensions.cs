@@ -25,7 +25,7 @@ namespace DataLayer.Mapping
             result.ProductId = stock.ProductId;
             result.Quantity = stock.Quantity;
             result.Price = stock.Price;
-            
+            result.Product = stock.Product;
             return result;
             
         }
