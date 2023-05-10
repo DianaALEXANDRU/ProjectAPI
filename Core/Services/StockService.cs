@@ -1,4 +1,5 @@
-﻿using DataLayer;
+﻿using Core.Dtos;
+using DataLayer;
 using DataLayer.Dtos;
 using DataLayer.Entities;
 using DataLayer.Mapping;
@@ -27,6 +28,34 @@ namespace Core.Services
             return results;
         }
 
-    
+        public StockDto GetById(int stockId)
+        {
+            var stock = unitOfWork.Stock.GetById(stockId);
+
+            var result = stock.ToStockDto();
+
+            return result;
+        }
+
+        public StockAddDto AddStock(StockAddDto payload)
+        {
+            if (payload == null) return null;
+
+
+            var newStock = new Stock
+            {
+                Quantity = payload.Quantity,
+                Price = payload.Price,
+                ProductId = payload.ProductId,
+              
+            };
+
+            unitOfWork.Stock.Insert(newStock);
+            unitOfWork.SaveChanges();
+
+            return payload;
+        }
+
+
     }
 }
