@@ -8,8 +8,8 @@ namespace DataLayer.Entities
 {
     public class Stock : BaseEntity
     {
-        long Quantity {  get; set; }
-        double Price { get; set; }
+       public long Quantity {  get; set; }
+       public double Price { get; set; }
 
         public int ProductId { get; set; }
         public Product Product { get; set; }

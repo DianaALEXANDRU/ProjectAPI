@@ -10,8 +10,8 @@ namespace DataLayer.Dtos
     public class StockDto
     {
         public int Id { get; set; }
-        long Quantity { get; set; }
-        double Price { get; set; }
+        public long Quantity { get; set; }
+        public double Price { get; set; }
 
         public int ProductId { get; set; }
     }
