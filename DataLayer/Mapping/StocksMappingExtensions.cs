@@ -19,11 +19,13 @@ namespace DataLayer.Mapping
         public static StockDto ToStockDto(this Stock stock)
         {
             if (stock == null) return null;
+
             var result = new StockDto();
             result.Id = stock.Id;
             result.ProductId = stock.ProductId;
             result.Quantity = stock.Quantity;
             result.Price = stock.Price;
+            
             return result;
             
         }
