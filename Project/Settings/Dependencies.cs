@@ -24,6 +24,7 @@ namespace Project.Settings
            
             services.AddScoped<AuthorizationService>();
             services.AddScoped<UserService>();
+            services.AddScoped<StockService>();
             services.AddScoped<ProductService>();
         }
 
@@ -33,7 +34,7 @@ namespace Project.Settings
             services.AddScoped<RoleRepository>();
             services.AddScoped<UserRepository>();
             services.AddScoped<ProductRepository>();
-
+            services.AddScoped<StockRepository>();
             services.AddScoped<UnitOfWork>();
         }
 

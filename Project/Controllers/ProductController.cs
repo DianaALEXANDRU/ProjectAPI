@@ -48,7 +48,7 @@ namespace Project.Controllers
 
             if (result == null)
             {
-                return BadRequest("Student cannot be added");
+                return BadRequest("Product cannot be added");
             }
 
             return Ok(result);

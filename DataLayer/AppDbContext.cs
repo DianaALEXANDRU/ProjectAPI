@@ -7,9 +7,11 @@ namespace DataLayer
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //optionsBuilder
+            //        .UseSqlServer("Server =.; Database = Proiect; Trusted_Connection = True; TrustServerCertificate = True", b => b.MigrationsAssembly("Project"))
             optionsBuilder
-                    .UseSqlServer("Server =.; Database = Proiect; Trusted_Connection = True; TrustServerCertificate = True", b => b.MigrationsAssembly("Project"))
-                    .LogTo(Console.WriteLine);
+                  .UseSqlServer("Server=localhost;Database=Proiect;User Id=admin;Password=1q2w3e;")
+                  .LogTo(Console.WriteLine);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -22,7 +24,7 @@ namespace DataLayer
      
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> User { get; set; }
-
+        public DbSet<Stock> Stocks { get; set; }
         public DbSet<Product> Products { get; set; }
 
     }
