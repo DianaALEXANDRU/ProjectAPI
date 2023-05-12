@@ -29,6 +29,7 @@ namespace Project.Controllers
         }
 
         [HttpGet("/get/{productId}")]
+        [Authorize(Roles = "Administrator, User")]
         public ActionResult<Product> GetById(int productId)
         {
             var result = productService.GetById(productId);
@@ -42,6 +43,7 @@ namespace Project.Controllers
         }
 
         [HttpPost("/add")]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Add([FromBody] ProductAddDto payload)
         {
             var result = productService.AddProduct(payload);
@@ -55,6 +57,7 @@ namespace Project.Controllers
         }
 
         [HttpDelete("/delete/{productId}")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult<Product> DeleteById(int productId)
         {
             var result = productService.DeleteById(productId);
@@ -68,6 +71,7 @@ namespace Project.Controllers
         }
 
         [HttpPatch("/edit")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult<bool> Update([FromBody] UpdateProductDto product)
         {
             var result = productService.UpdateProduct(product);
