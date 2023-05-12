@@ -3,6 +3,7 @@ using DataLayer;
 using DataLayer.Dtos;
 using DataLayer.Entities;
 using DataLayer.Mapping;
+using DataLayer.Repositories;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -16,15 +17,22 @@ namespace Core.Services
     {
 
         private readonly UnitOfWork unitOfWork;
+        private ProductRepository productRepository;
 
-        public StockService(UnitOfWork unitOfWork)
+        public StockService(UnitOfWork unitOfWork, ProductRepository productRepository)
         {
             this.unitOfWork = unitOfWork;
+            this.productRepository = productRepository;
         }
 
         public List<Stock> GetAll()
         {
             var results = unitOfWork.Stock.GetAll();
+    
+            for (int idx= 0; idx< results.Count(); ++idx)
+            {
+                results[idx].Product = productRepository.GetById(results[idx].ProductId);
+            }
 
             return results;
         }
@@ -33,7 +41,9 @@ namespace Core.Services
         {
             var stock = unitOfWork.Stock.GetById(stockId);
 
+
             var result = stock.ToStockDto();
+            result.Product = productRepository.GetById(result.ProductId);
 
             return result;
         }
