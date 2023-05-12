@@ -67,7 +67,12 @@ namespace Core.Services
                 return false;
             }
 
-            //aici modific/adaug (Daca exista stoc pt produs prima data sterg stoc-ul si dupa sterg produsu )
+            var stock= unitOfWork.Stock.GetByProductId(productId);
+            if(stock != null)
+            {
+                unitOfWork.Stock.Remove(stock);
+                unitOfWork.SaveChanges();
+            } 
 
             unitOfWork.Products.Remove(product);
             unitOfWork.SaveChanges();

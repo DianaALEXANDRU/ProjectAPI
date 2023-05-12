@@ -16,6 +16,10 @@ namespace DataLayer.Repositories
             this.dbContext = dbContext;
         }
 
-
+        public Stock GetByProductId(int productId)
+        {
+            var result=dbContext.Stocks.FirstOrDefault(e => e.ProductId== productId);
+            return result;
+        }
     }
 }

@@ -7,10 +7,10 @@ namespace DataLayer
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder
-            //        .UseSqlServer("Server =.; Database = Proiect; Trusted_Connection = True; TrustServerCertificate = True", b => b.MigrationsAssembly("Project"))
             optionsBuilder
-                  .UseSqlServer("Server=localhost;Database=Proiect;User Id=admin;Password=1q2w3e;")
+                    .UseSqlServer("Server =.; Database = Proiect; Trusted_Connection = True; TrustServerCertificate = True", b => b.MigrationsAssembly("Project"))
+            /*optionsBuilder
+                  .UseSqlServer("Server=localhost;Database=Proiect;User Id=admin;Password=1q2w3e;")*/
                   .LogTo(Console.WriteLine);
         }
 
